@@ -83,6 +83,10 @@ create table products(
 );
 
 alter table products
+add constraint pk_product
+primary key (product_id);
+
+alter table products
 drop constraint fk_customer;
 
 alter table products
@@ -143,3 +147,112 @@ create table orders(
     references customers(customer_id)
 );
 
+insert into orders values (5001,2352,TO_DATE('06-JUL-2026','DD-MON-YYYY'),74999.00);
+insert into orders values (5002,2368,TO_DATE('10-JUL-2026','DD-MON-YYYY'),1299.00);
+insert into orders values (5003,2356,TO_DATE('07-APR-2026','DD-MON-YYYY'),4999.00);
+insert into orders values (5004,2363,TO_DATE('08-JUN-2026','DD-MON-YYYY'),699.00);
+insert into orders values (5005,2387,TO_DATE('22-FEB-2026','DD-MON-YYYY'),3499.00);
+insert into orders values (5006,2391,TO_DATE('13-JAN-2026','DD-MON-YYYY'),79999.00);
+insert into orders values (5007,2392,TO_DATE('20-FEB-2026','DD-MON-YYYY'),1599.00);
+insert into orders values (5008,2393,TO_DATE('27-MAR-2026','DD-MON-YYYY'),899.00);
+insert into orders values (5009,2394,TO_DATE('12-APR-2026','DD-MON-YYYY'),1999.00);
+insert into orders values (5010,2395,TO_DATE('17-MAY-2026','DD-MON-YYYY'),2499.00);
+
+insert into orders values (5011,2396,TO_DATE('24-JUN-2026','DD-MON-YYYY'),999.00);
+insert into orders values (5012,2397,TO_DATE('05-JUL-2026','DD-MON-YYYY'),4299.00);
+insert into orders values (5013,2398,TO_DATE('10-AUG-2026','DD-MON-YYYY'),599.00);
+insert into orders values (5014,2399,TO_DATE('21-SEP-2026','DD-MON-YYYY'),6999.00);
+insert into orders values (5015,2400,TO_DATE('07-OCT-2026','DD-MON-YYYY'),1499.00);
+insert into orders values (5016,2401,TO_DATE('16-NOV-2026','DD-MON-YYYY'),299.00);
+insert into orders values (5017,2402,TO_DATE('29-DEC-2026','DD-MON-YYYY'),499.00);
+insert into orders values (5018,2403,TO_DATE('13-JAN-2026','DD-MON-YYYY'),399.00);
+insert into orders values (5019,2404,TO_DATE('09-FEB-2026','DD-MON-YYYY'),1999.00);
+insert into orders values (5020,2405,TO_DATE('01-APR-2026','DD-MON-YYYY'),699.00);
+
+insert into orders values (5021,2352,TO_DATE('15-JUL-2026','DD-MON-YYYY'),2999.00);
+insert into orders values (5022,2368,TO_DATE('18-JUL-2026','DD-MON-YYYY'),5499.00);
+insert into orders values (5023,2356,TO_DATE('12-APR-2026','DD-MON-YYYY'),1799.00);
+insert into orders values (5024,2363,TO_DATE('20-JUN-2026','DD-MON-YYYY'),799.00);
+insert into orders values (5025,2387,TO_DATE('01-MAR-2026','DD-MON-YYYY'),899.00);
+insert into orders values (5026,2391,TO_DATE('25-JAN-2026','DD-MON-YYYY'),1499.00);
+insert into orders values (5027,2392,TO_DATE('25-FEB-2026','DD-MON-YYYY'),4999.00);
+insert into orders values (5028,2393,TO_DATE('30-MAR-2026','DD-MON-YYYY'),2499.00);
+insert into orders values (5029,2394,TO_DATE('15-APR-2026','DD-MON-YYYY'),599.00);
+insert into orders values (5030,2395,TO_DATE('25-MAY-2026','DD-MON-YYYY'),3499.00);
+
+select * from orders;
+
+-------------------------- CREATE ORDER_ITEMS TABLES ----------------------
+
+create table order_items(
+    order_item_id int primary key,
+    order_id int,
+    product_id int,
+    quantity int,
+    price number(10,2),
+
+    constraint fk_order_id
+    foreign key(order_id)
+    references orders(order_id),
+
+    constraint fk_product_id
+    foreign key(product_id)
+    references products(product_id)
+);
+
+insert into order_items values (7001,5001,1001,1,74999.00);
+insert into order_items values (7002,5001,1004,2,4999.00);
+insert into order_items values (7003,5002,1007,1,1299.00);
+insert into order_items values (7004,5002,1010,2,1499.00);
+insert into order_items values (7005,5003,1011,1,4999.00);
+insert into order_items values (7006,5003,1015,2,599.00);
+insert into order_items values (7007,5004,1016,1,699.00);
+insert into order_items values (7008,5004,1018,1,799.00);
+insert into order_items values (7009,5005,1021,1,3499.00);
+insert into order_items values (7010,5005,1025,1,1499.00);
+
+insert into order_items values (7011,5006,1002,1,79999.00);
+insert into order_items values (7012,5006,1005,1,2999.00);
+insert into order_items values (7013,5007,1008,1,1599.00);
+insert into order_items values (7014,5007,1006,2,799.00);
+insert into order_items values (7015,5008,1017,1,899.00);
+insert into order_items values (7016,5008,1019,2,599.00);
+insert into order_items values (7017,5009,1009,1,1999.00);
+insert into order_items values (7018,5009,1014,1,1799.00);
+insert into order_items values (7019,5010,1022,1,2499.00);
+insert into order_items values (7020,5010,1023,2,899.00);
+
+insert into order_items values (7021,5011,1020,1,999.00);
+insert into order_items values (7022,5011,1028,2,399.00);
+insert into order_items values (7023,5012,1013,1,4299.00);
+insert into order_items values (7024,5012,1012,1,5499.00);
+insert into order_items values (7025,5013,1015,1,599.00);
+insert into order_items values (7026,5013,1026,2,299.00);
+insert into order_items values (7027,5014,1024,1,6999.00);
+insert into order_items values (7028,5014,1029,1,1999.00);
+insert into order_items values (7029,5015,1025,1,1499.00);
+insert into order_items values (7030,5015,1027,2,499.00);
+
+insert into order_items values (7031,5016,1026,1,299.00);
+insert into order_items values (7032,5016,1030,1,699.00);
+insert into order_items values (7033,5017,1027,1,499.00);
+insert into order_items values (7034,5017,1028,2,399.00);
+insert into order_items values (7035,5018,1019,1,599.00);
+insert into order_items values (7036,5018,1016,1,699.00);
+insert into order_items values (7037,5019,1029,1,1999.00);
+insert into order_items values (7038,5019,1030,2,699.00);
+insert into order_items values (7039,5020,1016,1,699.00);
+insert into order_items values (7040,5020,1023,1,899.00);
+
+insert into order_items values (7041,5021,1005,1,2999.00);
+insert into order_items values (7042,5021,1027,1,499.00);
+insert into order_items values (7043,5022,1012,1,5499.00);
+insert into order_items values (7044,5022,1004,1,4999.00);
+insert into order_items values (7045,5023,1014,1,1799.00);
+insert into order_items values (7046,5023,1006,1,799.00);
+insert into order_items values (7047,5024,1018,1,799.00);
+insert into order_items values (7048,5025,1017,1,899.00);
+insert into order_items values (7049,5026,1025,1,1499.00);
+insert into order_items values (7050,5030,1021,1,3499.00);
+
+select * from order_items;
