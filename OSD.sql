@@ -14,7 +14,7 @@
 
 -- select * from tab;
 
--------------------------- CREATE CUSTOMERS TABLES ----------------------
+--------------------------------------------------------------------------- CREATE CUSTOMERS TABLES -------------------------------------------------------------------------------
 
 create table Customers(
     customer_id int primary key,
@@ -50,7 +50,7 @@ insert into customers values (2405, 'Yogesh', 'K', 'yogeshk@gmail.com', '9340011
 select * from customers;
 
 
--------------------------- CREATE CATEGORIES TABLES ----------------------
+------------------------------------------------------------------------- CREATE CATEGORIES TABLES -------------------------------------------------------------------------
 
 
 
@@ -69,7 +69,7 @@ insert into categories values (4006, 'Beauty');
 select * from categories;
 
 
--------------------------- CREATE PRODUCTS TABLES ----------------------
+---------------------------------------------------------------------- CREATE PRODUCTS TABLES ----------------------------------------------------------------------------------
 
 create table products(
     product_id number,
@@ -99,31 +99,26 @@ insert into products values (1002, 'Apple iPhone 15', 79999.00, 15, 4001);
 insert into products values (1003, 'Dell Inspiron Laptop', 58999.00, 10, 4001);
 insert into products values (1004, 'Sony Headphones', 4999.00, 40, 4001);
 insert into products values (1005, 'Boat Smart Watch', 2999.00, 50, 4001);
-
 insert into products values (1006, 'Men T-Shirt', 799.00, 60, 4002);
 insert into products values (1007, 'Women Kurti', 1299.00, 35, 4002);
 insert into products values (1008, 'Blue Jeans', 1599.00, 30, 4002);
 insert into products values (1009, 'Hoodie', 1999.00, 20, 4002);
 insert into products values (1010, 'Formal Shirt', 1499.00, 25, 4002);
-
 insert into products values (1011, 'Nike Running Shoes', 4999.00, 18, 4003);
 insert into products values (1012, 'Adidas Sneakers', 5499.00, 15, 4003);
 insert into products values (1013, 'Puma Sports Shoes', 4299.00, 20, 4003);
 insert into products values (1014, 'Leather Sandals', 1799.00, 30, 4003);
 insert into products values (1015, 'Flip Flops', 599.00, 50, 4003);
-
 insert into products values (1016, 'Python Programming', 699.00, 45, 4004);
 insert into products values (1017, 'Java Complete Guide', 899.00, 30, 4004);
 insert into products values (1018, 'Data Structures Book', 799.00, 25, 4004);
 insert into products values (1019, 'SQL for Beginners', 599.00, 40, 4004);
 insert into products values (1020, 'Operating Systems', 999.00, 20, 4004);
-
 insert into products values (1021, 'Mixer Grinder', 3499.00, 12, 4005);
 insert into products values (1022, 'Pressure Cooker', 2499.00, 18, 4005);
 insert into products values (1023, 'Non-Stick Pan', 899.00, 40, 4005);
 insert into products values (1024, 'Vacuum Cleaner', 6999.00, 10, 4005);
 insert into products values (1025, 'Electric Kettle', 1499.00, 25, 4005);
-
 insert into products values (1026, 'Face Wash', 299.00, 80, 4006);
 insert into products values (1027, 'Shampoo', 499.00, 70, 4006);
 insert into products values (1028, 'Body Lotion', 399.00, 60, 4006);
@@ -133,7 +128,7 @@ insert into products values (1030, 'Lipstick', 699.00, 35, 4006);
 select * from products;
 
 
--------------------------- CREATE PRODUCTS TABLES ----------------------
+------------------------------------------------------------------------------ CREATE PRODUCTS TABLES ---------------------------------------------------------------------------
 
 
 create table orders(
@@ -157,7 +152,6 @@ insert into orders values (5007,2392,TO_DATE('20-FEB-2026','DD-MON-YYYY'),1599.0
 insert into orders values (5008,2393,TO_DATE('27-MAR-2026','DD-MON-YYYY'),899.00);
 insert into orders values (5009,2394,TO_DATE('12-APR-2026','DD-MON-YYYY'),1999.00);
 insert into orders values (5010,2395,TO_DATE('17-MAY-2026','DD-MON-YYYY'),2499.00);
-
 insert into orders values (5011,2396,TO_DATE('24-JUN-2026','DD-MON-YYYY'),999.00);
 insert into orders values (5012,2397,TO_DATE('05-JUL-2026','DD-MON-YYYY'),4299.00);
 insert into orders values (5013,2398,TO_DATE('10-AUG-2026','DD-MON-YYYY'),599.00);
@@ -168,7 +162,6 @@ insert into orders values (5017,2402,TO_DATE('29-DEC-2026','DD-MON-YYYY'),499.00
 insert into orders values (5018,2403,TO_DATE('13-JAN-2026','DD-MON-YYYY'),399.00);
 insert into orders values (5019,2404,TO_DATE('09-FEB-2026','DD-MON-YYYY'),1999.00);
 insert into orders values (5020,2405,TO_DATE('01-APR-2026','DD-MON-YYYY'),699.00);
-
 insert into orders values (5021,2352,TO_DATE('15-JUL-2026','DD-MON-YYYY'),2999.00);
 insert into orders values (5022,2368,TO_DATE('18-JUL-2026','DD-MON-YYYY'),5499.00);
 insert into orders values (5023,2356,TO_DATE('12-APR-2026','DD-MON-YYYY'),1799.00);
@@ -182,7 +175,7 @@ insert into orders values (5030,2395,TO_DATE('25-MAY-2026','DD-MON-YYYY'),3499.0
 
 select * from orders;
 
--------------------------- CREATE ORDER_ITEMS TABLES ----------------------
+------------------------------------------------------------------------ CREATE ORDER_ITEMS TABLES ---------------------------------------------------------------------
 
 create table order_items(
     order_item_id int primary key,
@@ -210,7 +203,6 @@ insert into order_items values (7007,5004,1016,1,699.00);
 insert into order_items values (7008,5004,1018,1,799.00);
 insert into order_items values (7009,5005,1021,1,3499.00);
 insert into order_items values (7010,5005,1025,1,1499.00);
-
 insert into order_items values (7011,5006,1002,1,79999.00);
 insert into order_items values (7012,5006,1005,1,2999.00);
 insert into order_items values (7013,5007,1008,1,1599.00);
@@ -221,7 +213,6 @@ insert into order_items values (7017,5009,1009,1,1999.00);
 insert into order_items values (7018,5009,1014,1,1799.00);
 insert into order_items values (7019,5010,1022,1,2499.00);
 insert into order_items values (7020,5010,1023,2,899.00);
-
 insert into order_items values (7021,5011,1020,1,999.00);
 insert into order_items values (7022,5011,1028,2,399.00);
 insert into order_items values (7023,5012,1013,1,4299.00);
@@ -232,7 +223,6 @@ insert into order_items values (7027,5014,1024,1,6999.00);
 insert into order_items values (7028,5014,1029,1,1999.00);
 insert into order_items values (7029,5015,1025,1,1499.00);
 insert into order_items values (7030,5015,1027,2,499.00);
-
 insert into order_items values (7031,5016,1026,1,299.00);
 insert into order_items values (7032,5016,1030,1,699.00);
 insert into order_items values (7033,5017,1027,1,499.00);
@@ -243,7 +233,6 @@ insert into order_items values (7037,5019,1029,1,1999.00);
 insert into order_items values (7038,5019,1030,2,699.00);
 insert into order_items values (7039,5020,1016,1,699.00);
 insert into order_items values (7040,5020,1023,1,899.00);
-
 insert into order_items values (7041,5021,1005,1,2999.00);
 insert into order_items values (7042,5021,1027,1,499.00);
 insert into order_items values (7043,5022,1012,1,5499.00);
