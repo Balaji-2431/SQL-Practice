@@ -26,6 +26,9 @@ create table Customers(
     create_at date
 );
 
+alter table customers
+modify create_at date not null;
+
 insert into Customers values (2352,'Balaji','T','balaji@gmail.com','9345868996','Bodi',TO_DATE('05-JUL-2026','DD-MON-YYYY'));
 insert into customers values (2368, 'Abdul', 'Rahuman', 'abdulrahuman@gmail.com', '9514789456', 'Palayam', TO_DATE('09-jul-2026','DD-MON-YYYY'));
 insert into customers values (2356, 'Aswin', 'Karthick', 'aswinkarthick@gmail.com', '7695874057', 'Bodi', TO_DATE('05-apr-2026','DD-MON-YYYY'));
@@ -94,6 +97,18 @@ add constraint fk_product_category
 foreign key(category_id)
 references categories(category_id);
 
+alter table products
+modify (
+    product_name varchar(100) not null,
+    price number(10,2) not null,
+    stock number not null
+);
+
+alter table products
+modify (
+    category_id number not null
+);
+
 insert into products values (1001, 'Samsung Galaxy S24', 74999.00, 25, 4001);
 insert into products values (1002, 'Apple iPhone 15', 79999.00, 15, 4001);
 insert into products values (1003, 'Dell Inspiron Laptop', 58999.00, 10, 4001);
@@ -140,6 +155,20 @@ create table orders(
     constraint fk_customer
     foreign key(customer_id)
     references customers(customer_id)
+);
+
+alter table orders
+rename column toal_amt to total_amt;
+
+alter table orders
+modify (
+    order_date date not null,
+    total_amt number(10,2) not null
+);
+
+alter table orders
+modify (
+    customer_id number not null
 );
 
 insert into orders values (5001,2352,TO_DATE('06-JUL-2026','DD-MON-YYYY'),74999.00);
@@ -191,6 +220,18 @@ create table order_items(
     constraint fk_product_id
     foreign key(product_id)
     references products(product_id)
+);
+
+alter table order_items
+modify (
+    quantity number not null,
+    price number(10,2) not null
+);
+
+alter table order_items
+modify (
+    order_id number not null,
+    product_id number not null
 );
 
 insert into order_items values (7001,5001,1001,1,74999.00);
@@ -245,3 +286,232 @@ insert into order_items values (7049,5026,1025,1,1499.00);
 insert into order_items values (7050,5030,1021,1,3499.00);
 
 select * from order_items;
+
+
+-- ----------------------------------------------------------- WAQTD ---------------------------------------------------------------
+
+
+-- 1. Display all customer details
+
+select * from customers;
+
+-- 2. Display only: first_name, last_name, city
+
+select first_name, last_name, city
+from customers;
+
+-- 3. Display all products whose price is greater than 5000. 
+
+select * 
+from products
+where price > 5000;
+
+
+-- 4. Display all customers from Bodi. 
+
+select *
+from customers
+where city='Bodi';
+
+-- 5. Display all products sorted by price (highest to lowest).
+
+select *
+from products
+order by price desc;
+
+-- 6. Display products whose stock is less than 20.
+
+select *
+from products 
+where stock < 20;
+
+-- 7. Display customers whose first name starts with 'A'.
+
+select *
+from customers
+where first_name like 'A%';
+
+-- 8. Display all orders placed after 01-JUL-2026.
+
+select * 
+from orders
+where order_date > '01-JUL-2026';
+
+-- 9. Display all products whose price is between 1000 and 5000.
+
+select * 
+from products
+where price between 1000 and 5000;
+
+
+-- 10. Display all products that belong to category_id = 4004 (Books).
+
+select *
+from products
+where category_id = 4004 ;
+
+
+-- 11. Count total customers.
+
+select count(*) as Total_Customers
+from customers;
+
+-- 12. Count total products.
+
+select count(*) as Total_products
+from products;
+
+
+-- 13. Find the highest product price.
+
+select max(price) as Highest_price
+from products;
+
+-- 14. Find the lowest product price.
+
+select min(price) as "Lowest price"
+from products;
+
+
+-- 15. Find the average product price.
+
+select avg(price) as Average_price
+from products;
+
+
+
+-- 16. Find total stock available.
+
+select sum(stock) as total_available_stock
+from products;
+
+
+-- 17. Count how many products are in each category.
+
+select category_id, count(*) as number_of_products
+from products
+group by category_id;
+
+-- 18. Find the average price of each category.
+
+select category_id, avg(price) as avg_category_price
+from products
+group by category_id;
+
+-- 19. Display categories having more than 5 products.
+
+select category_id
+from products
+group by category_id
+having count(*) > 5;
+
+-- 20. Find total order amount.
+
+select sum(total_amt) as Total_order_amt
+from orders;
+
+
+-- 21. Display customer name and order date.
+
+select first_name || ' ' || last_name as customer_name, order_date
+from customers c, orders o
+where c.customer_id = o.customer_id;
+
+-- 22. Display customer name with total amount.
+
+select first_name || ' ' || last_name as customer_name, total_amt
+from customers c, orders o
+where c.customer_id = o.customer_id;
+
+
+-- 23. Display product name with category name.
+
+select product_name, category_name
+from products p, categories c
+where p.category_id = c.category_id;
+
+
+
+-- 24. Display order id with customer name and order date.
+
+select order_id , first_name || ' ' || last_name as customer_name, order_date
+from orders o, customers c
+where o.customer_id = c.customer_id;
+
+
+-- 25. Display order id with product name.
+
+select order_id, product_name
+from order_items o, products p
+where o.product_id = p.product_id;
+
+
+-- 26. Display customer name, product name, quantity.
+
+select first_name || ' ' || last_name as customer_name, product_name, quantity
+from customers c, orders o, order_items o1, products p
+where c.customer_id=o.customer_id and o.order_id = o1.order_id and o1.product_id = p.product_id;
+
+
+-- 27. Display all products ordered by Balaji.
+
+select product_name, first_name 
+from customers c, orders o, order_items o1, products p
+where c.customer_id = o.customer_id and  o.order_id = o1.order_id and o1.product_id = p.product_id and first_name = 'Balaji';
+
+-- 28. Display all customers who placed orders.
+
+select DISTINCT first_name || ' ' || last_name as customer_name
+from customers c, orders o
+where c.customer_id = o.customer_id;
+
+
+-- 29. Display customers who never placed orders.
+
+select DISTINCT first_name || ' ' || last_name as customer_name
+from customers c, orders o
+where c.customer_id = o.customer_id(+) and order_id is null;
+
+-- 30. Display category name with number of products.
+
+select category_name, count(*) as number_of_products
+from categories c, products p
+where c.category_id = p.category_id
+group by category_name;
+
+-- 31. Display customer name and total number of orders.
+
+select first_name || ' ' || last_name as customer_name, count(*) as number_of_orders
+from customers c, orders o
+where c.customer_id = o.customer_id
+group by first_name , customer_id , last_name;
+
+-- 32. Display most expensive product ordered.
+
+SELECT product_name,
+       price
+FROM products
+WHERE price =
+(
+    SELECT MAX(price)
+    FROM products
+);
+
+-- 33. Display order containing Samsung Galaxy S24.
+
+select order_item_id, order_id, product_name, o1.price
+from order_items o1, products p
+where o1.product_id = p.product_id and product_name = 'Samsung Galaxy S24';
+
+
+-- 34. Display all products with their category.
+
+select product_name, category_name
+from products p, categories c
+where p.category_id = c.category_id;
+
+-- 35. Display customer, product, quantity and price.
+
+select first_name || ' ' || last_name as customer_name, product_name, quantity, p.price
+from customers c, orders o, order_items o1, products p
+where c.customer_id = o.customer_id and o.order_id = o1.order_id and o1.product_id = p.product_id;
